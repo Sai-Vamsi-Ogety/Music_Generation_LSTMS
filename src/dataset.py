@@ -22,13 +22,13 @@ print("There are", len(vocab), "unique characters in the dataset")
 # 1. text to integers
 global char2idx
 char2idx = {u:i for i, u in enumerate(vocab)}
-json.dump(char2idx, open("../input/char2idx.json",'w'))
+# json.dump(char2idx, open("../input/char2idx.json",'w'))
 # Create a mapping from indices to characters. This is
 #   the inverse of char2idx and allows us to convert back
 #   from unique index to the character in our vocabulary.
 global idx2char
 idx2char = np.array(vocab)
-np.savetxt('../input/idx2char.txt', idx2char, fmt='%s' )
+# np.savetxt('../input/idx2char.txt', idx2char, fmt='%s' )
 
 print('{')
 for char,_ in zip(char2idx, range(20)):
