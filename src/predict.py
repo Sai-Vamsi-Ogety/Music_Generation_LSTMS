@@ -15,17 +15,20 @@ vocab_size = 83
 embedding_dim = 256 
 rnn_units = 1024  # Experiment between 1 and 2048
 
-# Checkpoint location: 
-checkpoint_dir = './training_checkpoints_2000_iterations'
+def load_model():
+    # Checkpoint location: 
+    checkpoint_dir = './training_checkpoints_2000_iterations'
 
 
-model = build_model(vocab_size, embedding_dim, rnn_units, batch_size=1) # TODO
+    model = build_model(vocab_size, embedding_dim, rnn_units, batch_size=1) # TODO
 
-# Restore the model weights for the last checkpoint after training
-model.load_weights(tf.train.latest_checkpoint(checkpoint_dir))
-model.build(tf.TensorShape([1, None]))
+    # Restore the model weights for the last checkpoint after training
+    model.load_weights(tf.train.latest_checkpoint(checkpoint_dir))
+    model.build(tf.TensorShape([1, None]))
 
-model.summary()
+    model.summary()
+
+    return model
 
 def generate_text(model, start_string, generation_length=1000):
     # Evaluation step (generating ABC text using the learned RNN model)
@@ -65,11 +68,7 @@ def generate_text(model, start_string, generation_length=1000):
 
     return (start_string + ''.join(text_generated))
 
-generated_songs = generate_text(model, start_string="X", generation_length=1000)
-print(generated_songs[0])
-file1 = open("/home/jovyan/work/input/generated_songs_2000.txt","w") 
-file1.write(generated_songs)
-file1.close() 
+
 
 # for i, song in enumerate(generated_songs): 
     
@@ -87,3 +86,12 @@ file1.close()
 #     if waveform:
 #         print("Generated song", i)
 #         ipythondisplay.display(waveform)
+
+if __name__ == "__main__" :
+    
+    model = load_model()
+    generated_songs = generate_text(model, start_string="X", generation_length=1000)
+    print(generated_songs[0])
+    file1 = open("/home/jovyan/work/input/generated_songs_2000.txt","w") 
+    file1.write(generated_songs)
+    file1.close() 

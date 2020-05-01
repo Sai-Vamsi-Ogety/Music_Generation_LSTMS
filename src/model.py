@@ -20,4 +20,7 @@ def build_model(vocab_size, embedding_dim, rnn_units, batch_size):
 
 	return model
 
+if __name__ == "__main__" :
+    build_model()
+
 

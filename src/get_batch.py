@@ -25,3 +25,7 @@ def create_batch(vectorized_songs, seq_length, batch_size) :
 #    print("======\n[FAIL] could not pass tests")
 # else: 
 #    print("======\n[PASS] passed all tests!")
+
+if __name__ == "__main__":
+	create_batch()
+	
